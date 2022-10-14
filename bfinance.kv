@@ -1,0 +1,321 @@
+WindowManager:
+    FirstWindow:
+        id: FW
+    SecondWindow:
+        id: SW
+    ThirdWindow:
+        id: TW
+
+<FirstWindow>:
+    name: 'menu'
+    
+    MDLabel:
+        text: "Olá Breno!"
+        font_size: 25
+        font_name: "C:\Windows\Fonts\Candara"
+        halign: 'center'
+        pos_hint: {"center_x": 0.5, "center_y": 0.92}
+        height: self.texture_size[1]
+        padding_y: 15
+
+    MDCard:
+        size_hint: None, None
+        size: 350, 140
+        #md_bg_color: 0, 0.19, 0.57, 1
+        radius: 20
+        pos_hint: {"center_x": 0.5, "center_y": 0.8}
+        elevation: 10
+        padding: 25
+        spacing: 25
+        orientation: 'vertical'
+
+        MDLabel:
+            text: "Você tem:"
+            font_size: 22
+            font_name: "C:\Windows\Fonts\Candara"
+            halign: 'center'
+            height: self.texture_size[1]
+            padding_y: 15
+
+        MDLabel:
+            id: now
+            text: root.Valor_atual
+            font_size: 35
+            halign: 'center'
+            height: self.texture_size[1]
+            padding_y: 15
+
+        MDProgressBar:
+            id: progress_bar
+            min: 0
+            max: 2000
+            value: root.Valor_progress_bar
+            color: 0, 1, 0.4, 1
+            size_hint_y: 0.2
+       
+        
+
+    MDRectangleFlatButton:
+        text: 'GANHEI'
+        font_size: 21
+        font_name: "C:\Windows\Fonts\Candara"
+        text_color: 1, 1, 1, 1
+        line_color:  0, 1, 0.4, 1
+        pos_hint: {'center_x':0.5, 'center_y':0.6}
+        on_press: 
+            root.manager.current = 'Second'
+            root.manager.transition.direction = "left"
+                
+    MDRectangleFlatButton:
+        text: 'GASTEI'
+        font_size: 21
+        pos_hint: {'center_x':0.5, 'center_y':0.5}
+        text_color: 1, 1, 1, 1
+        line_color: 1, 0.4, 0, 1
+        font_name: "C:\Windows\Fonts\Candara"
+        on_press: 
+            root.manager.current = 'Third'
+            root.manager.transition.direction = "right"
+
+    MDCard:
+        size_hint: None, None
+        size: 350, 65
+        #md_bg_color: 0, 0.19, 0.57, 1
+        radius: 20
+        pos_hint: {"center_x": 0.5, "center_y": 0.13}
+        elevation: 15
+        padding: 25
+        spacing: 25
+        orientation: 'horizontal'
+
+        MDLabel:
+            #id: 'ohai'
+            text: "ULTIMO GASTO: "
+            font_size: 15
+            font_name: "C:\Windows\Fonts\Candara"
+            halign: 'left'
+            height: self.texture_size[1]
+            padding_y: 15
+
+        MDLabel:
+            id: 'ultimo_gasto'
+            text: root.Ultimo_gasto
+            font_size: 20
+            theme_text_color: "Custom"
+            text_color: 1, 0.4, 0, 1
+            halign: 'right'
+            height: self.texture_size[0]
+            padding_y: 15
+
+    MDCard:
+        size_hint: None, None
+        size: 350, 65
+        #md_bg_color: 0, 0.19, 0.57, 1
+        radius: 20
+        pos_hint: {"center_x": 0.5, "center_y": 0.23}
+        elevation: 15
+        padding: 25
+        spacing: 25
+        orientation: 'horizontal'
+
+        MDLabel:
+            text: "ULTIMO GANHO: "
+            font_name: "C:\Windows\Fonts\Candara"
+            font_size: 15
+            halign: 'left'
+            height: self.texture_size[1]
+            padding_y: 15
+
+
+        MDLabel:
+            id: 'ultimo_ganho'
+            text: root.Ultimo_ganho
+            font_size: 20
+            theme_text_color: "Custom"
+            text_color: 0, 1, 0.4, 1
+            halign: 'right'
+            height: self.texture_size[0]
+            padding_y: 15
+
+<SecondWindow>:
+    name: 'Second'
+    
+    MDTextFieldRound:
+        id: ganho
+        hint_text: "Quanto Ganhamos?"
+        mode: "round"
+        max_text_length: 5
+        helper_text: "R$"
+        helper_text_mode: "on_focus"
+        width: 250
+        size_hint_x: None
+        font_size: 25
+        pos_hint: {"center_x": 0.5, "center_y": 0.90}
+        
+
+    MDRectangleFlatButton:
+        text: 'Atualizar'
+        text_color: 1, 1, 1, 1
+        line_color:  0, 1, 0.4, 1
+        pos_hint: {'center_x':0.5, 'center_y':0.8}
+        on_press:
+            root.win(ganho.text)
+        
+    MDCard:
+        size_hint: None, None
+        size: 320, 370
+        pos_hint: {"center_x": 0.5, "center_y": 0.50}
+        radius: 10
+        elevation: 10
+        padding: 15
+        spacing: 15
+        orientation: 'vertical'
+
+        MDIcon:
+            icon: 'cash-plus'
+            size_hint: None, None
+            font_size: 40
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+        MDLabel:
+            id: um
+            text: "+ {:.0f}".format(root.Ganho_01)
+            font_size: 20
+            halign: 'center'
+            theme_text_color: "Custom"
+            text_color: 0, 1, 0.4, 1
+
+        MDLabel:
+            id: dois
+            text: "+ {:.0f}".format(root.Ganho_02)
+            font_size: 20
+            halign: 'center'
+            theme_text_color: "Custom"
+            text_color: 0, 1, 0.4, 1
+        
+        MDLabel:
+            id: tres
+            text: "+ {:.0f}".format(root.Ganho_03)
+            font_size: 20
+            halign: 'center'
+            theme_text_color: "Custom"
+            text_color: 0, 1, 0.4, 1
+        
+        MDLabel:
+            id: quatro
+            text: "+ {:.0f}".format(root.Ganho_04)
+            font_size: 20
+            halign: 'center'
+            theme_text_color: "Custom"
+            text_color: 0, 1, 0.4, 1
+        
+        MDLabel:
+            id: cinco
+            text: "+ {:.0f}".format(root.Ganho_05)
+            font_size: 20
+            halign: 'center'
+            theme_text_color: "Custom"
+            text_color: 0, 1, 0.4, 1
+
+    MDRectangleFlatButton:
+        text: 'Voltar'
+        text_color: 1, 1, 1, 1
+        line_color:  0, 1, 0.4, 1
+        pos_hint: {'center_x':0.5, 'center_y':0.10}
+        on_press: 
+            root.manager.current = 'menu'
+            root.manager.transition.direction = "right"
+
+<ThirdWindow>:
+    name: 'Third'
+    MDTextFieldRound:
+        id: perca
+        hint_text: "Quanto Perdemos?"
+        mode: "round"
+        max_text_length: 5
+        helper_text: "R$"
+        helper_text_mode: "on_focus"
+        width: 250
+        size_hint_x: None
+        font_size: 25
+        line_color_normal: 1, 0, 0, 1
+        color_mode: 'accent'
+        pos_hint: {"center_x": 0.5, "center_y": 0.90}
+        
+
+    MDRectangleFlatButton:
+        text: 'Atualizar'
+        line_color: 1, 0.4, 0, 1
+        text_color: 1, 1, 1, 1
+        pos_hint: {'center_x':0.5, 'center_y':0.8}
+        on_press:
+            root.lost(perca.text)
+
+    MDCard:
+        id: historico
+        size_hint: None, None
+        size: 320, 370
+        pos_hint: {"center_x": 0.5, "center_y": 0.50}
+        radius: 10
+        elevation: 10
+        padding: 15
+        spacing: 15
+        orientation: 'vertical'
+
+        MDIcon:
+            icon: 'cash-minus'
+            size_hint: None, None
+            font_size: 40
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+        MDLabel:
+            id: 1
+            text:"- {:.0f}".format(root.Gasto_01)
+            font_size: 20
+            halign: 'center'
+            theme_text_color: "Custom"
+            text_color: 1, 0.4, 0, 1
+
+        MDLabel:
+            id: 2
+            text: "- {:.0f}".format(root.Gasto_02)
+            font_size: 20
+            halign: 'center'
+            theme_text_color: "Custom"
+            text_color: 1, 0.4, 0, 1
+        
+        MDLabel:
+            id: 3
+            text: "- {:.0f}".format(root.Gasto_03)
+            font_size: 20
+            halign: 'center'
+            theme_text_color: "Custom"
+            text_color: 1, 0.4, 0, 1
+        
+        MDLabel:
+            id: 4
+            text: "- {:.0f}".format(root.Gasto_04)
+            font_size: 20
+            halign: 'center'
+            theme_text_color: "Custom"
+            text_color: 1, 0.4, 0, 1
+        
+        MDLabel:
+            id: 5
+            text: "- {:.0f}".format(root.Gasto_05)
+            font_size: 20
+            halign: 'center'
+            theme_text_color: "Custom"
+            text_color: 1, 0.4, 0, 1
+    
+    
+    MDRectangleFlatButton:
+        text: 'Voltar'
+        line_color: 1, 0.4, 0, 1
+        text_color: 1, 1, 1, 1
+        pos_hint: {'center_x':0.5, 'center_y':0.10}
+        on_press: 
+            root.manager.current = 'menu'
+            root.manager.transition.direction = "left"
+
+    
